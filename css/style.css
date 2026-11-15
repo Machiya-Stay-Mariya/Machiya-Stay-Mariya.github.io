@@ -353,6 +353,9 @@ body.is-locked { overflow: hidden; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .hero-slide, .js-fade { transition: none; }
+  .js-fade { transition: none; }
+  /* スライドは切り替えるが、拡大の動きはなくし、ふわっと入れ替えるだけにする */
+  .hero-slide, .photo-slider img { transform: none; transition: opacity 1.5s ease; }
+  .hero-slide.is-active, .photo-slider img.is-active { transform: none; }
   .scroll-down::after { animation: none; }
 }

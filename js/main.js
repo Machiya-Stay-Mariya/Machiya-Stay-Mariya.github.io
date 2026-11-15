@@ -237,9 +237,10 @@ document.addEventListener("keydown", (e) => {
 });
 
 /* ---------- メインビジュアルのスライドショー ---------- */
+/* 端末で「視差効果を減らす」がオンでも写真は切り替える（拡大の動きは CSS 側で止める） */
 const slides = document.querySelectorAll(".hero-slide");
 let current = 0;
-if (slides.length > 1 && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+if (slides.length > 1) {
   setInterval(() => {
     slides[current].classList.remove("is-active");
     current = (current + 1) % slides.length;
@@ -250,7 +251,7 @@ if (slides.length > 1 && !matchMedia("(prefers-reduced-motion: reduce)").matches
 /* ---------- 施設の紹介：写真ブロックのスライドショー ---------- */
 document.querySelectorAll(".photo-slider").forEach((box, i) => {
   const imgs = box.querySelectorAll("img");
-  if (imgs.length < 2 || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  if (imgs.length < 2) return;
   let n = 0;
   // ブロックごとに切り替えのタイミングを少しずらす
   setTimeout(() => {
