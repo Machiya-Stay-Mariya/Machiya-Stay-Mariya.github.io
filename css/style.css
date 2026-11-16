@@ -351,6 +351,34 @@ body.is-locked { overflow: hidden; }
 .lang-switch-mobile { display: none; justify-content: center; padding: 8px 0 4px; font-size: 14px; }
 @media (max-width: 860px) { .lang-switch-mobile { display: flex; } }
 
+/* ---------- スマートフォン：縦書きキャッチコピーを画面の高さいっぱいに ----------
+   長い方の行（15文字）が「1文字 = 文字サイズ × (1 + 字間)」で並ぶので、
+   写真の枠の高さから上下の余白を引き、その文字数分で割って文字サイズを決める。
+   svh = ブラウザのツールバーを除いた、実際に見えている画面の高さ */
+@media (max-width: 860px) and (orientation: portrait) {
+  .hero { height: calc(100vh - var(--header-h)); height: calc(100svh - var(--header-h)); }
+  /* 3枚目の街並み：縦画面では中央より右寄りを見せる */
+  .hero-slide--street { background-position: 72% center; }
+  html[lang="ja"] .hero-copy,
+  html[lang="zh"] .hero-copy {
+    right: 6vw; letter-spacing: .2em; line-height: 2.1;
+    /* 上は24px、下は左下の表記と「Scroll」に重ならないよう96px空ける */
+    top: 24px; transform: none;
+    /* 15文字 × 1.2 = 18。横幅が足りない端末では 11vw まで */
+    font-size: min(calc((100svh - var(--header-h) - 120px) / 18), 11vw);
+  }
+}
+@media (orientation: landscape) and (max-height: 500px) {
+  /* 横置き：写真の枠を画面の高さに収める（はみ出していたのを解消） */
+  .hero { min-height: 0; height: calc(100vh - var(--header-h)); height: calc(100svh - var(--header-h)); }
+  html[lang="ja"] .hero-copy,
+  html[lang="zh"] .hero-copy {
+    right: 6vw; letter-spacing: .12em; line-height: 2;
+    /* 15文字 × 1.12 = 16.8。上下12pxずつ余白 */
+    font-size: calc((100svh - var(--header-h) - 24px) / 16.8);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .js-fade { transition: none; }
