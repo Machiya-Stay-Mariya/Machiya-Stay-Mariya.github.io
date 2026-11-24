@@ -4,7 +4,7 @@
 
 /* ---------- 設定（URLが決まったらここを書き換えてください） ---------- */
 const CONFIG = {
-  bookingUrl: "#", // 予約サイトのURL
+  bookingUrl: "https://airbnb.jp/h/2026mariya", // 予約サイト（Airbnb）のURL
 };
 
 /* ---------- 翻訳データ（日本語は HTML 内の文言をそのまま使用） ---------- */
